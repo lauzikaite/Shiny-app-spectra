@@ -3,19 +3,19 @@ library(ggplot2)
 library(shinythemes)
 
 # Load data ---------------------------------------------------------------
-static <- read.table("spectra_static.txt", header = T, stringsAsFactors = F)[,c("ppm","intensity5")]
+static <- read.table("/spectra_static.txt", header = T, stringsAsFactors = F)[,c("ppm","intensity5")]
 colnames(static) <- c("ppm", "intensity")
 
-reactive_1 <- read.table('Hippuric_acid_new.txt', header = T, stringsAsFactors = F)
+reactive_1 <- read.table('/Hippuric_acid_new.txt', header = T, stringsAsFactors = F)
 # default - almost none, intensity1 - huge levels, intensity2 - medium levels
 
-reactive_2 <- read.table('Tartaric_acid_new.txt', header = T, stringsAsFactors = F)
+reactive_2 <- read.table('/Tartaric_acid_new.txt', header = T, stringsAsFactors = F)
 # default - almost none, intensity1 - huge levels, intensity2 - medium levels
 
-reactive_3 <- read.table('L-Carnitine_new.txt', header = T, stringsAsFactors = F)
+reactive_3 <- read.table('/L-Carnitine_new.txt', header = T, stringsAsFactors = F)
 # default - almost none, intensity1 - huge levels, intensity2 - medium levels
 
-reactive_4 <- read.table('TMAO_new.txt', header = T, stringsAsFactors = F)
+reactive_4 <- read.table('/TMAO_new.txt', header = T, stringsAsFactors = F)
 # default - almost none, intensity1 - huge levels, intensity2 - medium levels
 
 # Server ------------------------------------------------------------------
