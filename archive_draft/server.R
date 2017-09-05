@@ -2,10 +2,26 @@ library(shiny)
 library(ggplot2)
 library(shinythemes)
 
+# Load data ---------------------------------------------------------------
+static <- read.table("spectra_static.txt", header = T, stringsAsFactors = F)[,c("ppm","intensity5")]
+colnames(static) <- c("ppm", "intensity")
+
+reactive_1 <- read.table('Hippuric_acid_new.txt', header = T, stringsAsFactors = F)
+# default - almost none, intensity1 - huge levels, intensity2 - medium levels
+
+reactive_2 <- read.table('Tartaric_acid_new.txt', header = T, stringsAsFactors = F)
+# default - almost none, intensity1 - huge levels, intensity2 - medium levels
+
+reactive_3 <- read.table('L-Carnitine_new.txt', header = T, stringsAsFactors = F)
+# default - almost none, intensity1 - huge levels, intensity2 - medium levels
+
+reactive_4 <- read.table('TMAO_new.txt', header = T, stringsAsFactors = F)
+# default - almost none, intensity1 - huge levels, intensity2 - medium levels
+
+# Server ------------------------------------------------------------------
 # Define server logic required to draw spectra
 server <- function(input, output) {
-  
-  
+
   make_data <- eventReactive(input$go, {
     runif(input$hippurate)
     if(input$hippurate == 2) {
@@ -38,6 +54,3 @@ server <- function(input, output) {
       scale_y_continuous(limits = c(0, 150))
   })
 }
-
-# Run the application 
-shinyApp(ui = ui, server = server)
