@@ -1,0 +1,11 @@
+name: shiny_app
+title: shiny_app
+account: elze
+server: shinyapps.io
+appId: 211393
+bundleId: 970099
+url: https://elze.shinyapps.io/shiny_app/
+when: 1504720580.01148
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: www/NMR.png
