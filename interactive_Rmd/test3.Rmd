@@ -110,7 +110,7 @@ body <-  dashboardBody(
               box("Your dietary habits, even those forbidden snacks, can be identified by running your urine sample through an NMR machine. Here is how your urine would likely to look, based on your selected inputs.")
             ),
             fluidRow(
-              box(plotOutput("spectra"))
+              box(plotOutput("spectra", height = "100%", width = "100%"))
               ))
     )
 )
@@ -226,7 +226,7 @@ ui <- dashboardPage(
 
 
 # Create Shiny app ----
-shinyApp(ui, server, options = list(width = "100%", height = 550))
+shinyApp(ui, server, options = list(width = "100%"))
 
 ```
 

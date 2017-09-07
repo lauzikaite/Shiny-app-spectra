@@ -5,6 +5,7 @@ library(shinythemes)
 library(plotly)
 library(shinydashboard)
 
+# version 1.0: multiple daskboard menu items, spectra is listed separately from the ui selections, overall height is not flexible
 
 # Load data ---------------------------------------------------------------
 static <- read.table("spectra_static.txt", header = T, stringsAsFactors = F)[,c("ppm","intensity5")]
