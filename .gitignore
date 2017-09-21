@@ -19,3 +19,4 @@
 /dist/
 /*.egg-info
 /Tests/htmlcov/
+.Rproj.user

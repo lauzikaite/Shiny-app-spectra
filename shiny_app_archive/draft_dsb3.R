@@ -5,63 +5,63 @@ library(plotly)
 static <- read.table("/Users/el1514/Documents/Scripts/Github-public/ShinyApp-DietarySpectra/shiny_app/Static.txt", header = T, stringsAsFactors = F)
 
 reactive_1 <- read.table('/Users/el1514/Documents/Scripts/Github-public/ShinyApp-DietarySpectra/shiny_app/Hippurate.txt', header = T, stringsAsFactors = F)
-bcg_1 <- rbind(data.frame("ppm" = 3.964816,
-                                   "default" = 0,
-                                   "intensity1" = 0,
-                                   "intensity2" = 0,
-                                   "peak" = 1
-                          ),
-               reactive_1,
-               data.frame("ppm" = 7.850467,
-                          "default" = 0,
-                          "intensity1" = 0,
-                          "intensity2" = 0,
-                          "peak" = 4)
-                )
+# bcg_1 <- rbind(data.frame("ppm" = 3.964816,
+#                                    "default" = 0,
+#                                    "intensity1" = 0,
+#                                    "intensity2" = 0,
+#                                    "peak" = 1
+#                           ),
+#                reactive_1,
+#                data.frame("ppm" = 7.850467,
+#                           "default" = 0,
+#                           "intensity1" = 0,
+#                           "intensity2" = 0,
+#                           "peak" = 4)
+#                 )
                
 
 reactive_2 <- read.table('/Users/el1514/Documents/Scripts/Github-public/ShinyApp-DietarySpectra/shiny_app/Tartrate.txt', header = T, stringsAsFactors = F)
-bcg_2 <- rbind(data.frame("ppm" = 4.332051,
-                          "default" = 0,
-                          "intensity1" = 0,
-                          "intensity2" = 0,
-                          "peak" = 1
-                  ),
-                  reactive_2,
-                  data.frame("ppm" = 4.337548,
-                             "default" = 0,
-                             "intensity1" = 0,
-                             "intensity2" = 0,
-                             "peak" = 1)
-                  )
+# bcg_2 <- rbind(data.frame("ppm" = 4.332051,
+#                           "default" = 0,
+#                           "intensity1" = 0,
+#                           "intensity2" = 0,
+#                           "peak" = 1
+#                   ),
+#                   reactive_2,
+#                   data.frame("ppm" = 4.337548,
+#                              "default" = 0,
+#                              "intensity1" = 0,
+#                              "intensity2" = 0,
+#                              "peak" = 1)
+#                   )
 
 reactive_3 <- read.table('/Users/el1514/Documents/Scripts/Github-public/ShinyApp-DietarySpectra/shiny_app/Carnitine.txt', header = T, stringsAsFactors = F)
-bcg_3 <- rbind(data.frame("ppm" = 3.224849,
-                          "default" = 0,
-                          "intensity1" = 0,
-                          "intensity2" = 0,
-                          "peak" = 1),
-                reactive_3,
-                data.frame("ppm" = 4.562397,
-                           "default" = 0,
-                           "intensity1" = 0,
-                           "intensity2" = 0,
-                           "peak" = 4)
-                )
+# bcg_3 <- rbind(data.frame("ppm" = 3.224849,
+#                           "default" = 0,
+#                           "intensity1" = 0,
+#                           "intensity2" = 0,
+#                           "peak" = 1),
+#                 reactive_3,
+#                 data.frame("ppm" = 4.562397,
+#                            "default" = 0,
+#                            "intensity1" = 0,
+#                            "intensity2" = 0,
+#                            "peak" = 4)
+#                 )
 
 reactive_4 <- read.table('/Users/el1514/Documents/Scripts/Github-public/ShinyApp-DietarySpectra/shiny_app/TMAO.txt', header = T, stringsAsFactors = F)
-bcg_4 <- rbind(data.frame("ppm" = 3.224849,
-                          "default" = 0,
-                          "intensity1" = 0,
-                          "intensity2" = 0,
-                          "peak" = 1),
-                reactive_4,
-                data.frame("ppm" = 3.235844,
-                           "default" = 0,
-                           "intensity1" = 0,
-                           "intensity2" = 0,
-                           "peak" = 1)
-                )
+# bcg_4 <- rbind(data.frame("ppm" = 3.224849,
+#                           "default" = 0,
+#                           "intensity1" = 0,
+#                           "intensity2" = 0,
+#                           "peak" = 1),
+#                 reactive_4,
+#                 data.frame("ppm" = 3.235844,
+#                            "default" = 0,
+#                            "intensity1" = 0,
+#                            "intensity2" = 0,
+#                            "peak" = 1)
+#                 )
 
 # bcg_static <- static[-(which(static$ppm %in% bcg_1$ppm ||static$ppm  %in% bcg_2$ppm || static$ppm  %in% bcg_3$ppm || ))]
 
@@ -78,38 +78,40 @@ mkdb <- data.frame("ppm" = c(static$ppm, reactive_1_s$ppm, reactive_2_s$ppm, rea
                    "peak" = c(static$peak, reactive_1_s$peak, reactive_2_s$peak, reactive_3_s$peak, reactive_4_s$peak)
 )
 
-reactive_1_s <- data.frame("ppm" = bcg_1[,1], "intensity" = bcg_1[,(4)], "peak" = bcg_1$peak)
-reactive_2_s <- data.frame("ppm" = bcg_2[,1], "intensity" = bcg_2[,(4)], "peak" = bcg_2$peak)
-reactive_3_s <- data.frame("ppm" = bcg_3[,1], "intensity" = bcg_3[,(4)], "peak" = bcg_3$peak)
-reactive_4_s <- data.frame("ppm" = bcg_4[,1], "intensity" = bcg_4[,(4)], "peak" = bcg_4$peak)
+mkdb <- mkdb[order(mkdb$ppm),]
 
-mkpl <- data.frame("ppm" = c(static$ppm, reactive_1_s$ppm, reactive_2_s$ppm, reactive_3_s$ppm, reactive_4_s$ppm),
-                   "intensity" = c(static$intensity, reactive_1_s$intensity, reactive_2_s$intensity, reactive_3_s$intensity, reactive_4_s$intensity),
-                   "type" = c(rep("Other", nrow(static)), rep("Hippurate", nrow(reactive_1_s)), rep("Tartrate", nrow(reactive_2_s)), rep("Carnitine", nrow(reactive_3_s)), rep("TMAO", nrow(reactive_4_s))),
-                   "peak" = c(static$peak, reactive_1_s$peak, reactive_2_s$peak, reactive_3_s$peak, reactive_4_s$peak)
-)
+# reactive_1_s <- data.frame("ppm" = bcg_1[,1], "intensity" = bcg_1[,(4)], "peak" = bcg_1$peak)
+# reactive_2_s <- data.frame("ppm" = bcg_2[,1], "intensity" = bcg_2[,(4)], "peak" = bcg_2$peak)
+# reactive_3_s <- data.frame("ppm" = bcg_3[,1], "intensity" = bcg_3[,(4)], "peak" = bcg_3$peak)
+# reactive_4_s <- data.frame("ppm" = bcg_4[,1], "intensity" = bcg_4[,(4)], "peak" = bcg_4$peak)
+# 
+# mkpl <- data.frame("ppm" = c(static$ppm, reactive_1_s$ppm, reactive_2_s$ppm, reactive_3_s$ppm, reactive_4_s$ppm),
+#                    "intensity" = c(static$intensity, reactive_1_s$intensity, reactive_2_s$intensity, reactive_3_s$intensity, reactive_4_s$intensity),
+#                    "type" = c(rep("Other", nrow(static)), rep("Hippurate", nrow(reactive_1_s)), rep("Tartrate", nrow(reactive_2_s)), rep("Carnitine", nrow(reactive_3_s)), rep("TMAO", nrow(reactive_4_s))),
+#                    "peak" = c(static$peak, reactive_1_s$peak, reactive_2_s$peak, reactive_3_s$peak, reactive_4_s$peak)
+# )
 
 # Drafts - plot_ly --------------------------------------------------------
-# this one works but still joins line by groups, rather than as a single line
-plot_ly(data = mkdb, x = ~ ppm , y= ~intensity, type = 'scatter', color = ~type,
-        # mode = 'markers', 
-        # marker = list(size = 0.5),
-        mode = 'lines',
-        line = list(width = 0.3),
-        colors = c('#a6dba0', '#7b3294', 'black','#c2a5cf','#008837'),
-        connectgaps = FALSE,
-        stream = list(maxpoints = 10000)) %>%
-  layout(legend = list(x = 0.1, y = 0.9, orientation="h")) %>%
+
+# Plot a single line for all peaks together
+plot_ly(data = mkdb[,c("ppm", "intensity")], x = ~ ppm , y = ~intensity, type = 'scatter', mode = 'lines',
+        line = list(width = 0.8, color = "black"),
+        showlegend = FALSE) %>%
   layout(xaxis = list(title = "ppm",
                       range = c(9, 0), autorange = F, autorange="reversed",
                       showgrid = TRUE,
                       zeroline = FALSE,
-                      showline = FALSE),
+                      showline = FALSE,
+                      fixedrange = FALSE),
          yaxis = list(range = c(0, 250),
                       showgrid = TRUE,
                       zeroline = FALSE,
-                      showline = FALSE,
-                      showticklabels = FALSE))
+                      showline = TRUE,
+                      showticklabels = FALSE,
+                      fixedrange = FALSE)) 
+
+
+
 
 # Plot each peak as a seperate trace, and each sub-peak separetaly, but then peaks are not joined together at the ends
 plot_ly(data = subset(mkdb, type == "Other"), x = ~ ppm , y = ~intensity, type = 'scatter', mode = 'lines',

@@ -5,7 +5,7 @@ library(shinythemes)
 library(plotly)
 library(shinydashboard)
 
-# version4.0: 
+# version5.0: 
 
 # Load data ---------------------------------------------------------------
 static <- read.table("Static.txt", header = T, stringsAsFactors = F)
@@ -37,29 +37,34 @@ server <- function(input, output) {
                        "type" = c(rep("Other", nrow(static)), rep("Hippurate", nrow(reactive_1_s)), rep("Tartrate", nrow(reactive_2_s)), rep("Carnitine", nrow(reactive_3_s)), rep("TMAO", nrow(reactive_4_s))),
                        "peak" = as.factor(c(static$peak, reactive_1_s$peak, reactive_2_s$peak, reactive_3_s$peak, reactive_4_s$peak)))
     
-    # # Assign to parent environment
-    # mkdb <<- mkdb
+    # order by ppm
+    mkdb <- mkdb[order(mkdb$ppm),]
+    # assign data frame to parent environment for plotly_click to access it
+    db <<- mkdb
   })
   
-  # reactivily generate ggploy calling make_data()
-  output$spectra <- renderPlot({
+  # reactivily generate plot_ly calling make_data()
+  output$spectra <- renderPlotly({
     
-    ggplot() +
-      geom_line(data = make_data(), aes(x=-ppm, y=intensity)) +
-      theme_bw() +
-      theme(axis.text.x = element_text(size = 12),
-            axis.ticks.y = element_blank(),
-            axis.text.y = element_blank(),
-            axis.title = element_text(size = 12),
-            panel.grid.major = element_blank(),
-            panel.grid.minor = element_blank()) +
-      xlab("ppm") +
-      scale_x_continuous(breaks = c(0, -1, -2, -3, -4, -5, -6, -7, -8, -9), labels = c(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)) +
-      scale_y_continuous(limits = c(0, 250))
+    plot_ly(data = make_data()[,c("ppm", "intensity")], x = ~ ppm , y = ~intensity, type = 'scatter', mode = 'lines',
+            line = list(width = 0.8, color = "black"),
+            showlegend = FALSE) %>%
+      layout(xaxis = list(title = "ppm",
+                          range = c(9, 0), autorange = F, autorange="reversed",
+                          showgrid = TRUE,
+                          zeroline = FALSE,
+                          showline = FALSE,
+                          fixedrange = FALSE),
+             yaxis = list(range = c(0, 250),
+                          showgrid = TRUE,
+                          zeroline = FALSE,
+                          showline = TRUE,
+                          showticklabels = FALSE,
+                          fixedrange = FALSE)) 
     
   })
   
-
+  
   # reactivily generate plot_ly calling make_data()
   output$spectra2 <- renderPlotly({
     
@@ -94,21 +99,20 @@ server <- function(input, output) {
                           showticklabels = FALSE,
                           # disable ZOOM
                           fixedrange = TRUE))
-             # enable drag&select of data points
-             # dragmode = "select")
     
   })
-
+  
   output$peak_select <- renderUI({
     
-    # subset mkdb
+    # save click value
     s <- event_data("plotly_click")
     if(is.null(s) == TRUE) return(NULL)
-
-    # extract mkdb by the selected peak type
-    s_save <- unique(subset(mkdb, ppm == s$x)$"type")[1]
-
+    
+    # extract data frame by the selected peak type
+    s_save <- unique(subset(db, ppm == s$x)$"type")[1]
+    
     str1 <- paste("Selected peak:", "<B>",s_save, "</B>")
+    
     if (s_save == "Hippurate") str2 <- paste("Hippurate levels in urine are linked to fruit and vegetable consumption") 
     else {
       if (s_save == "Tartrate") str2 <- paste("Tartrate levels in urine are linked to grapes consumption")
@@ -123,8 +127,9 @@ server <- function(input, output) {
     
     HTML(paste(str1, str2, sep = '<br/>'))
   })
-
-  output$image1<-renderText({c('<img src="',"http://www.imperial.ac.uk/ImageCropToolT4/imageTool/uploaded-images/CSM_Web_002--tojpeg_1490287529495_x2.jpg",'">')})
+  
+  # import picture from url
+  output$image1<-renderText({c('<img src="',"https://www.ebi.ac.uk/training/online/sites/ebi.ac.uk.training.online/files/user/2760/images/Metabolomics/central_dogma_figure_1_.png",'">')})
 }
 
 
@@ -143,7 +148,9 @@ body <-  dashboardBody(
             ),
             
             # import image through url using output$image1
-            box(htmlOutput("image1", width = "50%", height = "50%"),
+            box(
+                htmlOutput("image1", width = "50%", height = "50%"),
+                includeMarkdown("./www/about_graphics.md"),
                 width = "50%", align = "center"
             )
             # import saved png image (jpg not supported)
@@ -211,15 +218,12 @@ body <-  dashboardBody(
                      id = "tabset1",
                      side = "right",
                      tabPanel(title = "Spectrum",
-                              "Your dietary habits, even those forbidden snacks, can be identified by running your urine sample through an NMR machine.
-                              Here is how your urine would likely to look, based on your selected inputs.",
-                              plotOutput("spectra")
+                              "Here is how your urine would likely to look, based on your selected inputs.",
+                              plotlyOutput("spectra")
                      ),
                      tabPanel(title = "Peaks",
                               "Click on a peak to learn more.",
                               plotlyOutput("spectra2"),
-                              # verbatimTextOutput("peak_click")
-                              # tableOutput("peak_select"),
                               htmlOutput("peak_select")
                               
                      )
@@ -242,7 +246,7 @@ body <-  dashboardBody(
   
   # define how footer looks like
   tags$footer(
-    tags$a(href="https://github.com/lauzikaite", "Code available @GitHub"),
+    tags$a(href="https://github.com/lauzikaite", "Page code @GitHub"),
     style = "color: white;
     position:absolute;
     align: right;
@@ -263,7 +267,7 @@ ui <- dashboardPage(
   
   skin = "black",
   
-  dashboardHeader(title = "Spectra game"),
+  dashboardHeader(title = "Are you what you eat? "),
   
   dashboardSidebar(
     
