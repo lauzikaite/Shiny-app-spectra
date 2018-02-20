@@ -1,0 +1,6 @@
+Biomedical research increasingly relies on high-throughput techniques, which allow detection of a large number of compounds/molecules at the same time. Examples of such techniques include gene sequencing, gene expression analysis, protein analysis and **metabolic profiling**. This website introduces the basic principles of metabolic profiling through an interactive game.
+
+Metabolic profiling (*metabolomics/metabonomics*) is the measurement of the levels of small molecules in biological samples, such as fluids (e.g. urine, blood), tissues (tumour biopsies) and even whole organisms (bacteria cultures). These molecules, commonly called **metabolites**, are low molecular weight organic compounds, such as sugars, lipids or fatty acids. There are thousands of different metabolites in any given cell. While plants have a much higher metabolite diversity than humans, the exact numbers are just estimates, since it is extremely hard to detect them due to their low molecular weight. 
+
+Metabolites are the products (or substrates) of biochemical reactions taking place in an organism. They constantly interact with each other, driving essential biological processes, such as cell growth and replication, as well as responses to external stimuli or disease progression.
+

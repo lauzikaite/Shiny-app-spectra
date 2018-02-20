@@ -1,0 +1,13 @@
+### Why do we study metabolites?
+
+There are many reasons to investigate small molecules found inside cells. For example, studies of metabolites and their interactions provide and opportunity to learn how a disease is initiated and how it progress through an organism further. Such knowledge is used in the development of novel drugs and treatment strategies, such as lifetysle changes. Furthermore, metabolic profiling enables researchers to identify prognostic *biomarkers* - molecules, which levels indicate whether an individual is going to develop a particular condition, such as coronary heart disease, early before the symptoms appear. Early diagnosis can help fighting life-treating diseases and even prevent some of them.  
+
+### How do we study metabolites?
+
+Associations between metabolites and various health conditions are found through large-scale studies, which involve hundreds and even thousands of individuals. Samples, usually blood or urine, are taken from each individual, along with numerous physiological measurements, such as blood pressure, weight and dietary habits. Samples are then analysed using metabolic profiling techniques, such as *Nuclear Magnetic Resonance* (NMR) spectroscopy. These techniques detect and quantity the levels of thousands of compounds in each sample. Levels of metabolites are then compared between patient groups to investigate how different molecules are involved in various biological processes. 
+
+NMR quantify molecules and provides information on their chemical structures, which is then used to identify the detected molecules. When a sample is subjected to NMR spectroscopy analysis, a spectra is generated. NMR spectra of biological samples comprises thousands of peaks, with each peak representing a different chemical group of a compound. Combinations of different chemical groups (i.e. peaks in the spectrum) allow to identify the exact chemical formula of a compound. Furthermore, the intensity of each peak is proportional to compound concentration and thus can be used as an indirect measurement of particular metabolite concentration.
+
+### Why to study dietary metabolites?
+
+A lot of large-scale biomedical studies use self-reported lifestyle data, provided by each individual. For example, study participanyts may be asked to report an average number of hours of sleep, daily cups of coffee, or to provide a more detailed food intake diary. It has been [shown](https://www.ncbi.nlm.nih.gov/pubmed/19594967) that as much as ~30% of such self-reported data is incorrect. This represents a major limitation when looking for meaningful associations between health conditions and lifestyle/environmental factors.

@@ -5,8 +5,8 @@ account: elze
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 217099
-bundleId: 990887
+bundleId: 1231741
 url: https://elze.shinyapps.io/who_are_you/
-when: 1505995059.44364
+when: 1519139854.90773
 asMultiple: FALSE
 asStatic: FALSE

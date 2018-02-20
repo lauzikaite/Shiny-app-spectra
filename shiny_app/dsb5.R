@@ -143,7 +143,7 @@ body <-  dashboardBody(
     tabItem(tabName = "about",
             
             box(
-              includeMarkdown("./www/about.md"),
+              includeMarkdown("./www/about_part1.md"),
               width = "50%", align = "justify"
             ),
             
@@ -152,10 +152,15 @@ body <-  dashboardBody(
                 htmlOutput("image1", width = "50%", height = "50%"),
                 includeMarkdown("./www/about_graphics.md"),
                 width = "50%", align = "center"
-            )
+            ),
             # import saved png image (jpg not supported)
             # box(img(src = "NMR.png", width = "190.8173", height = "315", align = "center"),
             #     width = 4)
+            
+            box(
+              includeMarkdown("./www/about_part2.md"),
+              width = "50%", align = "justify"
+            )
             
     ),
     
